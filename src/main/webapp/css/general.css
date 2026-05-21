@@ -256,4 +256,78 @@ button:hover {
     flex-wrap: nowrap;
 }
 
+/* ===== DROPDOWN CATÁLOGO ===== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#catalogoSelector {
+    background-color: var(--Azul-petróleo);
+    color: var(--Blanco);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.25s ease;
+    white-space: nowrap;
+}
+
+#catalogoSelector:hover,
+#catalogoSelector.activo {
+    background-color: var(--Azul-oscuro);
+}
+
+.dropdown-content {
+
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 2px);
+    
+
+    background-color: var(--Azul-petróleo);
+    
+    min-width: 210px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    z-index: 1001;
+    overflow: hidden;
+    
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-content.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-content a {
+    /* ✅ Color azul oscuro, letras blancas como imagen 3 */
+    color: var(--Blanco);
+    padding: 12px 18px;
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  
+    background-color: var(--Azul-oscuro);
+    color: var(--Blanco);
+}
+
 

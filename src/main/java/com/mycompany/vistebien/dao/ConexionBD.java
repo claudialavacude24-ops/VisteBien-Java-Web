@@ -8,7 +8,7 @@ public class ConexionBD {
 
     private static final String URL = "jdbc:mysql://localhost:3306/vistebien?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = ""; // pon tu contraseña real aquí
+    private static final String PASSWORD = ""; 
 
     public static Connection getConnection() {
         try {

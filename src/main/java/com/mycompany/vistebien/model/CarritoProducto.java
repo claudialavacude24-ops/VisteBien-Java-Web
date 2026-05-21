@@ -2,7 +2,7 @@ package com.mycompany.vistebien.model;
 
 public class CarritoProducto {
 
-    private int idCarrito;     // ← vuelve a incluirlo
+    private int idCarrito;     
     private int idProducto;
     private int idUsuario;
     private int cantidad;

@@ -154,5 +154,31 @@ public class ProductoDAO {
         }
         return false;
     }
+public List<Producto> listarPorCategoria(String categoria) {
+    List<Producto> lista = new ArrayList<>();
+    String sql = "SELECT * FROM producto WHERE Categoria = ?";
+    try (Connection conn = ConexionBD.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, categoria);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Producto p = new Producto();
+            p.setIdProducto(rs.getInt("IdProducto"));
+            p.setNombre(rs.getString("Nombre"));
+            p.setDescripcion(rs.getString("Descripcion"));
+            p.setPrecio(rs.getDouble("Precio"));
+            p.setStock(rs.getInt("Stock"));
+            p.setImagen(rs.getString("Imagen"));
+            p.setCategoria(rs.getString("Categoria"));
+            p.setIdUsuario(rs.getInt("IdUsuario"));
+            lista.add(p);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return lista;
+}
 
 }
