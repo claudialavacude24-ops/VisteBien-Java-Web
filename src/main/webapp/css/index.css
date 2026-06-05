@@ -41,11 +41,14 @@ body {
 
 .botones-inicio {
     display: flex;
-    gap: 20px;
     align-items: center;
+    justify-content: flex-end;
+    gap: 30px;
 }
 
-.botones-inicio a {
+.botones-inicio a,
+#catalogoSelector,
+#rolSelector {
     background-color: var(--Azul-petróleo);
     color: var(--Blanco);
     border: none;
@@ -53,12 +56,36 @@ body {
     border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
     text-decoration: none;
+    transition: background-color 0.3s ease;
+    min-width: 160px;
+    text-align: center;
+    display: inline-block;
 }
 
-.botones-inicio a:hover {
+.botones-inicio a:hover,
+#catalogoSelector:hover,
+#rolSelector:hover {
     background-color: var(--Azul-oscuro);
+}
+
+/* Botón carrito especial */
+.btn-carrito {
+    background-color: transparent;
+    color: var(--Blanco) !important;
+    border: 2px solid rgba(255,255,255,0.5);
+    padding: 7px 14px !important;
+    border-radius: 6px;
+    font-size: 15px !important;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: border-color 0.3s, background-color 0.3s !important;
+}
+
+.btn-carrito:hover {
+    border-color: var(--Blanco);
+    background-color: rgba(255,255,255,0.15) !important;
 }
 
 /* --- Contenido principal con imagen de fondo --- */
@@ -157,24 +184,38 @@ body {
     line-height: 1.7;
 }
 
-.boton-catalogo {
+.botones-inicio {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.botones-inicio a {
     background-color: var(--Azul-petróleo);
     color: var(--Blanco);
-    border: none;
-    padding: 15px 30px;
-    border-radius: 5px;
+    padding: 10px 18px;
+    border-radius: 6px;
     font-weight: 600;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: background-color 0.3s ease;
     text-decoration: none;
-    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.botones-inicio a:hover {
+    background-color: var(--Azul-oscuro);
+}
+.boton-catalogo{
+    background-color: var(--Azul-petróleo);
+    color: var(--Blanco);
+    padding: 20px 40px;
+    border-radius: 6px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
 .boton-catalogo:hover {
     background-color: var(--Azul-oscuro);
 }
-
 /* --- Catálogo --- */
 .seccion-catalogo {
     padding: 40px 40px;
@@ -309,8 +350,8 @@ footer a:hover {
 
 /* --- Campo de rol --- */
 #rolSelector {
-    background-color: var(--Azul-cielo);   /* distinto para diferenciarlo */
-    color: var(--Azul-petróleo);
+    background-color: var(--Azul-oscuro);
+    color: var(--Blanco);
     padding: 10px 18px;
     border-radius: 6px;
     font-weight: 600;
@@ -331,4 +372,78 @@ footer a:hover {
     background-color: var(--Azul-oscuro);
     color: var(--Blanco);
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* ===== DROPDOWN CATÁLOGO ===== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#catalogoSelector {
+    background-color: var(--Azul-petróleo);
+    color: var(--Blanco);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.25s ease;
+    white-space: nowrap;
+}
+
+#catalogoSelector:hover,
+#catalogoSelector.activo {
+    background-color: var(--Azul-oscuro);
+}
+
+.dropdown-content {
+
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 2px);
+
+
+    background-color: var(--Azul-petróleo);
+
+    min-width: 210px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    z-index: 1001;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-content.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-content a {
+    /* ✅ Color azul oscuro, letras blancas como imagen 3 */
+    color: var(--Blanco);
+    padding: 12px 18px;
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+
+    background-color: var(--Azul-oscuro);
+    color: var(--Blanco);
 }

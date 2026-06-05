@@ -7,44 +7,40 @@ import java.util.List;
 
 public class ProductoDAO {
 
-public boolean insertarProducto(Producto p) {
-    if (p.getNombre() == null || p.getNombre().trim().isEmpty()) {
-        System.out.println("Error: el producto no tiene nombre válido");
-        return false;
-    }
-    if (p.getCategoria() == null || p.getCategoria().trim().isEmpty()) {
-        System.out.println("Error: el producto no tiene categoría válida");
-        return false;
-    }
-    if (p.getPrecio() < 0) {
-        System.out.println("Error: el producto tiene precio negativo");
-        return false;
-    }
-    if (p.getCategoria() == null || p.getCategoria().trim().isEmpty()) {
-    System.out.println("Error: el producto no tiene categoría válida");
-    return false;
-}
+    public boolean insertarProducto(Producto p) {
+        if (p.getNombre() == null || p.getNombre().trim().isEmpty()) {
+            System.out.println("Error: el producto no tiene nombre válido");
+            return false;
+        }
+        if (p.getCategoria() == null || p.getCategoria().trim().isEmpty()) {
+            System.out.println("Error: el producto no tiene categoría válida");
+            return false;
+        }
+        if (p.getPrecio() < 0) {
+            System.out.println("Error: el producto tiene precio negativo");
+            return false;
+        }
+        if (p.getCategoria() == null || p.getCategoria().trim().isEmpty()) {
+            System.out.println("Error: el producto no tiene categoría válida");
+            return false;
+        }
 
-
-    String sql = "INSERT INTO producto (Nombre, Descripcion, Precio, Stock, Imagen, Categoria, IdUsuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    try (Connection conn = ConexionBD.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setString(1, p.getNombre().trim());
-        stmt.setString(2, p.getDescripcion());
-        stmt.setDouble(3, p.getPrecio());
-        stmt.setInt(4, p.getStock());
-        stmt.setString(5, p.getImagen());
-        stmt.setString(6, p.getCategoria().trim());
-        stmt.setInt(7, p.getIdUsuario());
-        stmt.executeUpdate();
-        return true;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
+        String sql = "INSERT INTO producto (Nombre, Descripcion, Precio, Stock, Imagen, Categoria, IdUsuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = ConexionBD.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, p.getNombre().trim());
+            stmt.setString(2, p.getDescripcion());
+            stmt.setDouble(3, p.getPrecio());
+            stmt.setInt(4, p.getStock());
+            stmt.setString(5, p.getImagen());
+            stmt.setString(6, p.getCategoria().trim());
+            stmt.setInt(7, p.getIdUsuario());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
-}
-
-
 
     public List<Producto> listarProductosConAdministrador() {
         List<Producto> lista = new ArrayList<>();
@@ -177,43 +173,42 @@ public boolean insertarProducto(Producto p) {
         }
         return false;
     }
-public List<Producto> listarPorCategoria(String categoria) {
-    List<Producto> lista = new ArrayList<>();
-    String sql = "SELECT * FROM producto WHERE Categoria = ?";
-    try (Connection conn = ConexionBD.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        stmt.setString(1, categoria);
-        ResultSet rs = stmt.executeQuery();
+    public List<Producto> listarPorCategoria(String categoria) {
+        List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM producto WHERE Categoria = ?";
+        try (Connection conn = ConexionBD.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        while (rs.next()) {
-            Producto p = new Producto();
-            p.setIdProducto(rs.getInt("IdProducto"));
-            p.setNombre(rs.getString("Nombre"));
-            p.setDescripcion(rs.getString("Descripcion"));
-            p.setPrecio(rs.getDouble("Precio"));
-            p.setStock(rs.getInt("Stock"));
-            p.setImagen(rs.getString("Imagen"));
-            p.setCategoria(rs.getString("Categoria"));
-            p.setIdUsuario(rs.getInt("IdUsuario"));
-            lista.add(p);
+            stmt.setString(1, categoria);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Producto p = new Producto();
+                p.setIdProducto(rs.getInt("IdProducto"));
+                p.setNombre(rs.getString("Nombre"));
+                p.setDescripcion(rs.getString("Descripcion"));
+                p.setPrecio(rs.getDouble("Precio"));
+                p.setStock(rs.getInt("Stock"));
+                p.setImagen(rs.getString("Imagen"));
+                p.setCategoria(rs.getString("Categoria"));
+                p.setIdUsuario(rs.getInt("IdUsuario"));
+                lista.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return lista;
     }
-    return lista;
-}
 // Método auxiliar para pruebas: limpia toda la tabla producto
-public void limpiarProductosDePrueba() {
-    String sql = "DELETE FROM producto WHERE Nombre='Camisa' AND Categoria='Ropa'";
-    try (Connection conn = ConexionBD.getConnection();
-         Statement stmt = conn.createStatement()) {
-        stmt.executeUpdate(sql);
-        System.out.println("Productos de prueba eliminados");
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-}
 
+    public void limpiarProductosDePrueba() {
+        String sql = "DELETE FROM producto WHERE Nombre='Camisa' AND Categoria='Ropa'";
+        try (Connection conn = ConexionBD.getConnection(); Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+            System.out.println("Productos de prueba eliminados");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

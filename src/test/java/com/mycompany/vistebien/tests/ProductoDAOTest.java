@@ -15,26 +15,24 @@ public class ProductoDAOTest {
 
     private ProductoDAO dao;
 
-@BeforeEach
-void setUp() {
-    dao = new ProductoDAO();
+    @BeforeEach
+    void setUp() {
+        dao = new ProductoDAO();
 
-    try (Connection conn = ConexionBD.getConnection();
-         Statement stmt = conn.createStatement()) {
-      
-        stmt.executeUpdate("DELETE FROM producto WHERE Nombre='Camisa' AND Categoria='Ropa'");
+        try (Connection conn = ConexionBD.getConnection(); Statement stmt = conn.createStatement()) {
 
-        // Asegura que exista el administrador
-        stmt.executeUpdate(
-            "INSERT INTO administrador (IdAdministrador, Nombre, Correo, Contrasena, Telefono) " +
-            "VALUES (1, 'AdminTest', 'admin@test.com', '1234', '3001234567') " +
-            "ON DUPLICATE KEY UPDATE Nombre='AdminTest'"
-        );
-    } catch (SQLException e) {
-        e.printStackTrace();
+            stmt.executeUpdate("DELETE FROM producto WHERE Nombre='Camisa' AND Categoria='Ropa'");
+
+            // Asegura que exista el administrador
+            stmt.executeUpdate(
+                    "INSERT INTO administrador (IdAdministrador, Nombre, Correo, Contrasena, Telefono) "
+                    + "VALUES (1, 'AdminTest', 'admin@test.com', '1234', '3001234567') "
+                    + "ON DUPLICATE KEY UPDATE Nombre='AdminTest'"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-}
-
 
     @Test
     void testInsertarProductoValido() {

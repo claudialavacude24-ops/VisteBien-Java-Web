@@ -18,10 +18,21 @@
 
                 <!-- Botones controlados por rol -->
                 <div class="botones-inicio">
+
                     <!-- Catálogo -->
-                    <select id="catalogoSelector">
-                        <option value="">Catálogo</option>
-                    </select>
+                    <!-- Botón Catálogo con desplegable -->
+                    <div class="dropdown">
+                        <button id="catalogoSelector">Catálogo</button>
+                        <div class="dropdown-content">
+                            <a href="${pageContext.request.contextPath}/catalogo">General</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Vestidos">Vestidos</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Pantalones">Pantalones</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Camisas y camisetas">Camisas y camisetas</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Ropa deportiva">Ropa deportiva</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Accesorios">Accesorios</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Maquillaje">Maquillaje</a>
+                        </div>
+                    </div>
 
                     <!-- Menú dinámico según rol -->
                     <c:choose>
@@ -29,12 +40,13 @@
                             <a href="administrador">Administrador</a>
                             <a href="producto">Productos</a>
                             <a href="usuario">Usuarios</a>
-                            <a href="carrito">Carrito</a>
+                            <a href="carrito">Gestion Carrito</a>
                             <a href="carrito_producto">Carrito Producto</a>
                         </c:when>
                         <c:when test="${rol == 'cliente'}">
-                            <a href="carrito">Carrito</a>
-                            <a href="carrito_producto">Carrito Producto</a>
+                            <a href="${pageContext.request.contextPath}/carrito" class="btn-carrito">
+                                🛒 Carrito
+                            </a>
                         </c:when>
                         <c:otherwise>
 
@@ -68,7 +80,7 @@
                 <div class="presentacion-texto">
                     <h1>Tu Estilo, Nuestra Pasión</h1>
                     <p>Más que una tienda, somos tu curador personal de estilo.</p>
-                    <a href="#" class="boton-catalogo">Catálogo</a>
+                    <a href="${pageContext.request.contextPath}/catalogo" class="boton-catalogo">Catálogo</a>
                 </div>
             </div>
 
@@ -91,6 +103,7 @@
                         <h3>Pantalones</h3>
                         <p>Desde la oficina hasta la aventura, tenemos el par que se adapta a tu día.</p>
                     </div>
+
                     <div class="catalogo-footer">
                         <div class="categoria-item">
                             <img src="img/imagen3.png" alt="Deportivo">
@@ -102,9 +115,22 @@
                             <h3>Camisas y camisetas</h3>
                             <p>Redefine tu descanso con nuestra colección de camisas y camisetas.</p>
                         </div>
+                        <!-- Nuevo: Maquillaje -->
+                        <div class="categoria-item">
+                            <img src="img/maquillaje.jpg" alt="Maquillaje">
+                            <h3>Maquillaje</h3>
+                            <p>Descubre nuestra línea de maquillaje para resaltar tu estilo único.</p>
+                        </div>
+                        <!-- Nuevo: Accesorios -->
+                        <div class="categoria-item">
+                            <img src="img/accesorios.avif" alt="Accesorios">
+                            <h3>Accesorios</h3>
+                            <p>Complementa tu look con accesorios modernos y elegantes.</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
 
         </header>
 
@@ -117,5 +143,73 @@
             </div>
         </footer>
 
+        <script>
+
+            (function () {
+                const btn = document.getElementById('catalogoSelector');
+                const menu = btn ? btn.closest('.dropdown').querySelector('.dropdown-content') : null;
+                if (!btn || !menu)
+                    return;
+
+                let closeTimer = null;   // ✅ Timer para el delay de cierre
+
+                // Abrir al hacer clic en el botón
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const abierto = menu.classList.contains('visible');
+                    if (abierto) {
+                        cerrarMenu();
+                    } else {
+                        abrirMenu();
+                    }
+                });
+
+                // ✅ Mantener abierto mientras el ratón esté sobre botón o menú
+                btn.addEventListener('mouseenter', function () {
+                    clearTimeout(closeTimer);
+                    abrirMenu();
+                });
+
+                btn.addEventListener('mouseleave', function () {
+                    // ✅ Espera 400ms antes de cerrar — tiempo suficiente para mover el cursor al menú
+                    closeTimer = setTimeout(cerrarMenu, 400);
+                });
+
+                menu.addEventListener('mouseenter', function () {
+                    clearTimeout(closeTimer);   // ✅ Cancela el cierre si el cursor llega al menú
+                });
+
+                menu.addEventListener('mouseleave', function () {
+                    closeTimer = setTimeout(cerrarMenu, 300);
+                });
+
+                // Cerrar al hacer clic fuera
+                document.addEventListener('click', function (e) {
+                    if (!btn.closest('.dropdown').contains(e.target)) {
+                        cerrarMenu();
+                    }
+                });
+
+                function abrirMenu() {
+                    menu.style.display = 'block';
+                    // Pequeño delay para que la transición CSS funcione
+                    requestAnimationFrame(function () {
+                        menu.classList.add('visible');
+                        btn.classList.add('activo');
+                    });
+                }
+
+                function cerrarMenu() {
+                    menu.classList.remove('visible');
+                    btn.classList.remove('activo');
+                    // ✅ Espera a que termine la animación antes de ocultar
+                    setTimeout(function () {
+                        if (!menu.classList.contains('visible')) {
+                            menu.style.display = 'none';
+                        }
+                    }, 200);
+                }
+            })();
+        </script>
     </body>
 </html>

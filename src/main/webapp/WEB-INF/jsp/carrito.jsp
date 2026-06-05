@@ -8,10 +8,6 @@
         <link rel="icon" type="image/png" href="img/favicon-32x32.png">
         <link rel="stylesheet" href="css/general.css">
         <style>
-            .field-container {
-                position: relative;
-                margin-bottom: 1.5em;
-            }
             .warning {
                 color: red;
                 display: none;
@@ -19,6 +15,34 @@
                 position: absolute;
                 top: 100%;
                 left: 0;
+            }
+            .error-message {
+                color: darkred;
+                font-weight: bold;
+                margin-bottom: 1em;
+            }
+
+            .btn-danger {
+                background-color: #c0392b;
+                color: #fff;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .btn-danger:hover {
+                background-color: #922b21;
+            }
+            .btn-secondary {
+                background-color: #7f8c8d;
+                color: #fff;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .btn-secondary:hover {
+                background-color: #626567;
             }
         </style>
     </head>
@@ -29,9 +53,26 @@
                 <img src="img/logo.jpg" alt="Logo VisteBien">
                 <div class="botones-inicio">
                     <a href="/index">Inicio</a>
-                    <a href="#">Catálogo</a>
+
+                    <!-- Catálogo -->
+                    <!-- Botón Catálogo con desplegable -->
+                    <div class="dropdown">
+                        <button id="catalogoSelector">Catálogo</button>
+                        <div class="dropdown-content">
+                            <a href="${pageContext.request.contextPath}/catalogo">General</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Vestidos">Vestidos</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Pantalones">Pantalones</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Camisas y camisetas">Camisas y camisetas</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Ropa deportiva">Ropa deportiva</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Accesorios">Accesorios</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Maquillaje">Maquillaje</a>
+                        </div>
+                    </div>
                     <a href="/administrador">Administrador</a>
-                    <a href="/carrito">Carrito</a>
+                    <a href="/producto">Productos</a>
+                    <a href="/usuario">Usuarios</a>
+                    <a href="/carrito">Gestion Carrito</a>
+                    <a href="/carrito_producto">Carrito Producto</a>
                 </div>
             </div>
             <div class="banner-texto">
@@ -120,4 +161,76 @@
                 }
             }
 
-            validarNumerico("idUsuarioCarrito", "warnInsertCarrito", null
+            // ✅ Aplicar validación en ambos formularios
+            validarNumerico("idUsuarioCarrito", "warnInsertCarrito", null);
+            validarNumerico("idEliminarCarrito", "warnDeleteCarrito", "formEliminarCarrito");
+            
+            
+            (function () {
+                const btn = document.getElementById('catalogoSelector');
+                const menu = btn ? btn.closest('.dropdown').querySelector('.dropdown-content') : null;
+                if (!btn || !menu)
+                    return;
+
+                let closeTimer = null;   // ✅ Timer para el delay de cierre
+
+                // Abrir al hacer clic en el botón
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const abierto = menu.classList.contains('visible');
+                    if (abierto) {
+                        cerrarMenu();
+                    } else {
+                        abrirMenu();
+                    }
+                });
+
+                // ✅ Mantener abierto mientras el ratón esté sobre botón o menú
+                btn.addEventListener('mouseenter', function () {
+                    clearTimeout(closeTimer);
+                    abrirMenu();
+                });
+
+                btn.addEventListener('mouseleave', function () {
+                    // ✅ Espera 400ms antes de cerrar — tiempo suficiente para mover el cursor al menú
+                    closeTimer = setTimeout(cerrarMenu, 400);
+                });
+
+                menu.addEventListener('mouseenter', function () {
+                    clearTimeout(closeTimer);   // ✅ Cancela el cierre si el cursor llega al menú
+                });
+
+                menu.addEventListener('mouseleave', function () {
+                    closeTimer = setTimeout(cerrarMenu, 300);
+                });
+
+                // Cerrar al hacer clic fuera
+                document.addEventListener('click', function (e) {
+                    if (!btn.closest('.dropdown').contains(e.target)) {
+                        cerrarMenu();
+                    }
+                });
+
+                function abrirMenu() {
+                    menu.style.display = 'block';
+                    // Pequeño delay para que la transición CSS funcione
+                    requestAnimationFrame(function () {
+                        menu.classList.add('visible');
+                        btn.classList.add('activo');
+                    });
+                }
+
+                function cerrarMenu() {
+                    menu.classList.remove('visible');
+                    btn.classList.remove('activo');
+                    // ✅ Espera a que termine la animación antes de ocultar
+                    setTimeout(function () {
+                        if (!menu.classList.contains('visible')) {
+                            menu.style.display = 'none';
+                        }
+                    }, 200);
+                }
+            })();
+        </script>
+    </body>
+</html>

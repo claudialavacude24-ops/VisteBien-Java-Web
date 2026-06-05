@@ -8,7 +8,7 @@
         <title>Gestión de Productos - VisteBien</title>
         <link rel="icon" type="image/png" href="img/favicon-32x32.png">
         <link rel="stylesheet" href="css/general.css">
-       
+
         <style>
             .field-container {
                 position: relative;
@@ -34,34 +34,37 @@
     <body>
 
         <header>
-    <div class="inicio-encabezado">
-        <img src="img/logo.jpg" alt="Logo VisteBien">
-        <div class="botones-inicio">
-            <a href="${pageContext.request.contextPath}/index">Inicio</a>
+            <div class="inicio-encabezado">
+                <img src="img/logo.jpg" alt="Logo VisteBien">
+                <div class="botones-inicio">
+                    <a href="${pageContext.request.contextPath}/index">Inicio</a>
 
-            <!-- Botón Catálogo con desplegable -->
-                 <div class="dropdown">
-                    <button id="catalogoSelector">Catálogo</button>
-                    <div class="dropdown-content">
-                        <a href="${pageContext.request.contextPath}/catalogo">General</a>
-                        <a href="${pageContext.request.contextPath}/catalogo/Vestidos">Vestidos</a>
-                        <a href="${pageContext.request.contextPath}/catalogo/Pantalones">Pantalones</a>
-                        <a href="${pageContext.request.contextPath}/catalogo/Camisas y camisetas">Camisas y camisetas</a>
-                        <a href="${pageContext.request.contextPath}/catalogo/Ropa deportiva">Ropa deportiva</a>
-                        <a href="${pageContext.request.contextPath}/catalogo/Accesorios">Accesorios</a>
-                        <a href="${pageContext.request.contextPath}/catalogo/Maquillaje">Maquillaje</a>
+                    <!-- Botón Catálogo con desplegable -->
+                    <div class="dropdown">
+                        <button id="catalogoSelector">Catálogo</button>
+                        <div class="dropdown-content">
+                            <a href="${pageContext.request.contextPath}/catalogo">General</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Vestidos">Vestidos</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Pantalones">Pantalones</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Camisas y camisetas">Camisas y camisetas</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Ropa deportiva">Ropa deportiva</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Accesorios">Accesorios</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Maquillaje">Maquillaje</a>
+                        </div>
                     </div>
-                </div>
 
-            <a href="${pageContext.request.contextPath}/administrador">Administrador</a>
-            <a href="${pageContext.request.contextPath}/producto">Productos</a>
-        </div>
-    </div>
-    <div class="banner-texto">
-        <h1>Gestión de Productos</h1>
-        <p>VisteBien — Panel de Control</p>
-    </div>
-</header>
+                    <a href="${pageContext.request.contextPath}/administrador">Administrador</a>
+                    <a href="${pageContext.request.contextPath}/producto">Productos</a>
+                    <a href="/usuario">Usuarios</a>
+                    <a href="/carrito">Gestion Carrito</a>
+                    <a href="/carrito_producto">Carrito Producto</a>
+                </div>
+            </div>
+            <div class="banner-texto">
+                <h1>Gestión de Productos</h1>
+                <p>VisteBien — Panel de Control</p>
+            </div>
+        </header>
 
 
         <div class="crud-section">
@@ -175,9 +178,9 @@
                         <td>${p.stock}</td>
                         <td>
                             <img src="${pageContext.request.contextPath}/uploads/${p.imagen}"
-     alt="${p.nombre}"
-     style="height:90px; width:70px; object-fit:cover; object-position:center 10%;
-            border-radius:6px; image-rendering:-webkit-optimize-contrast;">
+                                 alt="${p.nombre}"
+                                 style="height:90px; width:70px; object-fit:cover; object-position:center 10%;
+                                 border-radius:6px; image-rendering:-webkit-optimize-contrast;">
                         </td>
                         <td>${p.categoria}</td>
                         <td>${p.idUsuario}</td>
@@ -211,71 +214,72 @@
                     categoriaContainer.style.display = "none";
                 }
             }
-            
-              (function () {
-        const btn    = document.getElementById('catalogoSelector');
-        const menu   = btn ? btn.closest('.dropdown').querySelector('.dropdown-content') : null;
-        if (!btn || !menu) return;
 
-        let closeTimer = null;   // ✅ Timer para el delay de cierre
+            (function () {
+                const btn = document.getElementById('catalogoSelector');
+                const menu = btn ? btn.closest('.dropdown').querySelector('.dropdown-content') : null;
+                if (!btn || !menu)
+                    return;
 
-        // Abrir al hacer clic en el botón
-        btn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            const abierto = menu.classList.contains('visible');
-            if (abierto) {
-                cerrarMenu();
-            } else {
-                abrirMenu();
-            }
-        });
+                let closeTimer = null;   // ✅ Timer para el delay de cierre
 
-        // ✅ Mantener abierto mientras el ratón esté sobre botón o menú
-        btn.addEventListener('mouseenter', function () {
-            clearTimeout(closeTimer);
-            abrirMenu();
-        });
+                // Abrir al hacer clic en el botón
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const abierto = menu.classList.contains('visible');
+                    if (abierto) {
+                        cerrarMenu();
+                    } else {
+                        abrirMenu();
+                    }
+                });
 
-        btn.addEventListener('mouseleave', function () {
-            // ✅ Espera 400ms antes de cerrar — tiempo suficiente para mover el cursor al menú
-            closeTimer = setTimeout(cerrarMenu, 400);
-        });
+                // ✅ Mantener abierto mientras el ratón esté sobre botón o menú
+                btn.addEventListener('mouseenter', function () {
+                    clearTimeout(closeTimer);
+                    abrirMenu();
+                });
 
-        menu.addEventListener('mouseenter', function () {
-            clearTimeout(closeTimer);   // ✅ Cancela el cierre si el cursor llega al menú
-        });
+                btn.addEventListener('mouseleave', function () {
+                    // ✅ Espera 400ms antes de cerrar — tiempo suficiente para mover el cursor al menú
+                    closeTimer = setTimeout(cerrarMenu, 400);
+                });
 
-        menu.addEventListener('mouseleave', function () {
-            closeTimer = setTimeout(cerrarMenu, 300);
-        });
+                menu.addEventListener('mouseenter', function () {
+                    clearTimeout(closeTimer);   // ✅ Cancela el cierre si el cursor llega al menú
+                });
 
-        // Cerrar al hacer clic fuera
-        document.addEventListener('click', function (e) {
-            if (!btn.closest('.dropdown').contains(e.target)) {
-                cerrarMenu();
-            }
-        });
+                menu.addEventListener('mouseleave', function () {
+                    closeTimer = setTimeout(cerrarMenu, 300);
+                });
 
-        function abrirMenu() {
-            menu.style.display = 'block';
-            // Pequeño delay para que la transición CSS funcione
-            requestAnimationFrame(function () {
-                menu.classList.add('visible');
-                btn.classList.add('activo');
-            });
-        }
+                // Cerrar al hacer clic fuera
+                document.addEventListener('click', function (e) {
+                    if (!btn.closest('.dropdown').contains(e.target)) {
+                        cerrarMenu();
+                    }
+                });
 
-        function cerrarMenu() {
-            menu.classList.remove('visible');
-            btn.classList.remove('activo');
-            // ✅ Espera a que termine la animación antes de ocultar
-            setTimeout(function () {
-                if (!menu.classList.contains('visible')) {
-                    menu.style.display = 'none';
+                function abrirMenu() {
+                    menu.style.display = 'block';
+                    // Pequeño delay para que la transición CSS funcione
+                    requestAnimationFrame(function () {
+                        menu.classList.add('visible');
+                        btn.classList.add('activo');
+                    });
                 }
-            }, 200);
-        }
-    })();
+
+                function cerrarMenu() {
+                    menu.classList.remove('visible');
+                    btn.classList.remove('activo');
+                    // ✅ Espera a que termine la animación antes de ocultar
+                    setTimeout(function () {
+                        if (!menu.classList.contains('visible')) {
+                            menu.style.display = 'none';
+                        }
+                    }, 200);
+                }
+            })();
 
         </script>
 

@@ -12,14 +12,19 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #e6f2ff, #cce0ff);
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #e6f2ff, #cce0ff);
     color: #333;
     line-height: 1.6;
+}
+.crud-section {
+    flex: 1; 
 }
 
 /* --- Barra de navegación superior --- */
@@ -171,35 +176,6 @@ td {
     text-align: center;
 }
 
-/* --- Footer --- */
-footer {
-    background-color: var(--Azul-petróleo);
-    color: var(--Blanco);
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
-}
-
-footer img {
-    height: 55px;
-    object-fit: contain;
-    margin-bottom: 5px;
-}
-
-footer p {
-    margin: 0;
-    color: var(--Blanco);
-}
-
-footer a {
-    color: var(--Blanco);
-    text-decoration: underline;
-    transition: color 0.3s;
-}
-
-footer a:hover {
-    color: var(--Azul-cielo);
-}
 /* Botones generales */
 button {
     background-color: var(--Azul-petróleo);
@@ -331,3 +307,41 @@ button:hover {
 }
 
 
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th {
+    background-color: var(--Azul-petróleo); 
+    color: var(--Blanco);
+    padding: 10px;
+    text-align: center;
+}
+
+td {
+    /*background-color: var(--Azul-oscuro); 
+    color: var(--Blanco);*/
+    padding: 10px;
+    text-align: center;
+}
+
+footer {
+    background-color: var(--Azul-petróleo);
+    color: var(--Blanco);
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    margin-top: auto;
+}
+
+footer img {
+    height: 45px;
+    margin-bottom: 5px;
+}
+
+footer p {
+    margin: 0;
+}
