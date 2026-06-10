@@ -93,7 +93,7 @@
 
                             <c:if test="${not empty usuarioLogueado}">
                                 <span class="usuario-logueado">
-                                    Bienvenido ${usuarioLogueado.nombre}
+                                     ${usuarioLogueado.nombre}
                                 </span>
                             </c:if>
 
@@ -112,7 +112,7 @@
 
                             <c:if test="${not empty usuarioLogueado}">
                                 <span class="usuario-logueado">
-                                    Bienvenido ${usuarioLogueado.nombre}
+                                     ${usuarioLogueado.nombre}
                                 </span>
                             </c:if>
 
