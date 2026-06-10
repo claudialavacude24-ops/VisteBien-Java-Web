@@ -115,7 +115,7 @@
                     <c:if test="${not empty sessionScope.nombreUsuario}">
 
                         <span class="usuario-logueado">
-                            👤 ${sessionScope.nombreUsuario}
+                             ${sessionScope.nombreUsuario}
                         </span>
 
                         <a href="${pageContext.request.contextPath}/logout">

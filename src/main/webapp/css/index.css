@@ -129,9 +129,9 @@ body{
     transform:translateY(-2px);
 }
 
-.usuario-logueado::before{
+/*.usuario-logueado::before{
     content:"👤";
-}
+}*/
 
 /* ==========================
    DROPDOWN
