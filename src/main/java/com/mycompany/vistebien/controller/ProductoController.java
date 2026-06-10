@@ -43,7 +43,7 @@ public class ProductoController {
             @RequestParam int stock,
             @RequestParam("imagenFile") MultipartFile imagenFile,
             @RequestParam String categoria,
-            @RequestParam int idUsuario,
+            @RequestParam int idAdministrador,
             Model model) {
         try {
             String nombreArchivo = null;
@@ -75,7 +75,7 @@ public class ProductoController {
                     stock,
                     nombreArchivo,
                     categoria.trim(),
-                    idUsuario
+                    idAdministrador
             );
 
             dao.insertarProducto(p);

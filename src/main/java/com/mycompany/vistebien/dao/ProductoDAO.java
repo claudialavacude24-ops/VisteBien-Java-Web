@@ -25,7 +25,7 @@ public class ProductoDAO {
             return false;
         }
 
-        String sql = "INSERT INTO producto (Nombre, Descripcion, Precio, Stock, Imagen, Categoria, IdUsuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO producto (Nombre, Descripcion, Precio, Stock, Imagen, Categoria, IdAdministrador) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConexionBD.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, p.getNombre().trim());
             stmt.setString(2, p.getDescripcion());
@@ -33,7 +33,7 @@ public class ProductoDAO {
             stmt.setInt(4, p.getStock());
             stmt.setString(5, p.getImagen());
             stmt.setString(6, p.getCategoria().trim());
-            stmt.setInt(7, p.getIdUsuario());
+            stmt.setInt(7, p.getIdAdministrador());
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -55,7 +55,7 @@ public class ProductoDAO {
                 p.setStock(rs.getInt("Stock"));
                 p.setImagen(rs.getString("Imagen"));
                 p.setCategoria(rs.getString("Categoria"));
-                p.setIdUsuario(rs.getInt("IdUsuario"));
+                p.setIdAdministrador(rs.getInt("IdAdministrador"));
                 lista.add(p);
             }
         } catch (SQLException e) {
@@ -92,7 +92,7 @@ public class ProductoDAO {
 
     // ✅ Nuevo método: actualizar producto completo
     public void actualizarProducto(Producto p) {
-        String sql = "UPDATE producto SET Nombre=?, Descripcion=?, Precio=?, Stock=?, Imagen=?, Categoria=?, IdUsuario=? WHERE IdProducto=?";
+        String sql = "UPDATE producto SET Nombre=?, Descripcion=?, Precio=?, Stock=?, Imagen=?, Categoria=?, IdAdministrador=? WHERE IdProducto=?";
         try (Connection conn = ConexionBD.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, p.getNombre());
@@ -101,7 +101,7 @@ public class ProductoDAO {
             stmt.setInt(4, p.getStock());
             stmt.setString(5, p.getImagen());
             stmt.setString(6, p.getCategoria());
-            stmt.setInt(7, p.getIdUsuario());
+            stmt.setInt(7, p.getIdAdministrador());
             stmt.setInt(8, p.getIdProducto());
 
             stmt.executeUpdate();
@@ -149,7 +149,7 @@ public class ProductoDAO {
                 p.setStock(rs.getInt("Stock"));
                 p.setImagen(rs.getString("Imagen"));
                 p.setCategoria(rs.getString("Categoria"));
-                p.setIdUsuario(rs.getInt("IdUsuario"));
+                p.setIdAdministrador(rs.getInt("IdAdministrador"));
                 lista.add(p);
             }
 
@@ -191,7 +191,7 @@ public class ProductoDAO {
                 p.setStock(rs.getInt("Stock"));
                 p.setImagen(rs.getString("Imagen"));
                 p.setCategoria(rs.getString("Categoria"));
-                p.setIdUsuario(rs.getInt("IdUsuario"));
+                p.setIdAdministrador(rs.getInt("IdAdministrador"));
                 lista.add(p);
             }
         } catch (SQLException e) {

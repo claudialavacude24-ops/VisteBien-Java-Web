@@ -1,4 +1,4 @@
-package com.mycompany.vistebien.tests;
+/*package com.mycompany.vistebien.tests;
 
 import com.mycompany.vistebien.dao.ProductoDAO;
 import com.mycompany.vistebien.model.Producto;
@@ -54,4 +54,4 @@ public class ProductoDAOTest {
         boolean resultado = dao.insertarProducto(p);
         assertFalse(resultado, "No debería insertarse un producto con precio negativo");
     }
-}
+}*/

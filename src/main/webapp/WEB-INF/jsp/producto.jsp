@@ -90,7 +90,7 @@
                     <option value="Maquillaje">Maquillaje</option>
                 </select>
 
-                <input type="number" name="idUsuario" placeholder="ID Administrador" required>
+                <input type="number" name="idAdministrador" placeholder="ID Administrador" required>
                 <button type="submit">Guardar</button>
             </form>
 
@@ -111,7 +111,7 @@
                         <option value="Stock">Stock</option>
                         <option value="Imagen">Imagen</option>
                         <option value="Categoria">Categoría</option>
-                        <option value="IdUsuario">Administrador</option>
+                        <option value="IdAdministrador">Administrador</option>
                     </select>
 
                     <!-- Campo dinámico genérico -->
@@ -183,7 +183,7 @@
                                  border-radius:6px; image-rendering:-webkit-optimize-contrast;">
                         </td>
                         <td>${p.categoria}</td>
-                        <td>${p.idUsuario}</td>
+                        <td>${p.idAdministrador}</td>
                     </tr>
                 </c:forEach>
             </table>

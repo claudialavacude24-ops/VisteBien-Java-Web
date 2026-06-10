@@ -1,0 +1,242 @@
+:root {
+    --Azul-petroleo: #0D2C4A;
+    --Azul-oscuro: #1C3F5D;
+    --Azul-cielo: #5DA9E9;
+    --Blanco: #ffffff;
+    --Gris: #EDE9E6;
+}
+
+/* =========================
+   RESET
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+        135deg,
+        var(--Azul-petroleo),
+        var(--Azul-oscuro),
+        var(--Azul-cielo)
+    );
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+.auth-container{
+    width:100%;
+    max-width:1100px;
+    display:flex;
+    overflow:hidden;
+    border-radius:20px;
+    background:var(--Blanco);
+    box-shadow:0 20px 50px rgba(0,0,0,0.30);
+}
+
+/* =========================
+   PANEL IZQUIERDO
+========================= */
+.auth-left{
+    flex:1;
+    background:linear-gradient(
+        180deg,
+        var(--Azul-petroleo),
+        var(--Azul-oscuro)
+    );
+
+    color:white;
+    padding:60px 40px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.auth-left img{
+    width:150px;
+    height:150px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid rgba(255,255,255,0.2);
+    margin-bottom:25px;
+}
+
+.auth-left h1{
+    font-size:38px;
+    margin-bottom:15px;
+}
+
+.auth-left p{
+    font-size:18px;
+    line-height:1.7;
+    opacity:.95;
+}
+
+/* =========================
+   PANEL DERECHO
+========================= */
+.auth-right{
+    flex:1;
+    padding:50px;
+    background:white;
+}
+
+.auth-right h2{
+    color:var(--Azul-petroleo);
+    text-align:center;
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+/* =========================
+   MENSAJES
+========================= */
+.error{
+    background:#ffe5e5;
+    color:#c0392b;
+    border-left:5px solid #c0392b;
+    padding:12px;
+    margin-bottom:20px;
+    border-radius:8px;
+}
+
+.success{
+    background:#e8fff1;
+    color:#1e8449;
+    border-left:5px solid #1e8449;
+    padding:12px;
+    margin-bottom:20px;
+    border-radius:8px;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    color:var(--Azul-petroleo);
+    font-weight:bold;
+}
+
+.form-group input{
+    width:100%;
+    padding:14px;
+    border:2px solid #d6d6d6;
+    border-radius:10px;
+    font-size:15px;
+    transition:all .3s ease;
+}
+
+.form-group input:focus{
+    border-color:var(--Azul-cielo);
+    outline:none;
+    box-shadow:0 0 12px rgba(93,169,233,.35);
+}
+
+/* =========================
+   BOTON
+========================= */
+.btn-auth{
+    width:100%;
+    border:none;
+    cursor:pointer;
+    padding:15px;
+    font-size:16px;
+    font-weight:bold;
+    border-radius:10px;
+
+    background:linear-gradient(
+        135deg,
+        var(--Azul-petroleo),
+        var(--Azul-cielo)
+    );
+
+    color:white;
+
+    transition:.3s;
+}
+
+.btn-auth:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+
+/* =========================
+   LINKS
+========================= */
+.auth-links{
+    text-align:center;
+    margin-top:20px;
+}
+
+.auth-links a{
+    text-decoration:none;
+    color:var(--Azul-petroleo);
+    font-weight:bold;
+}
+
+.auth-links a:hover{
+    color:var(--Azul-cielo);
+}
+
+/* =========================
+   TITULO PEQUEÑO
+========================= */
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+/* =========================
+   LOGO PEQUEÑO
+========================= */
+.logo-mini{
+    display:block;
+    margin:0 auto 15px auto;
+    width:80px;
+    border-radius:50%;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width:900px){
+
+    .auth-container{
+        flex-direction:column;
+    }
+
+    .auth-left{
+        padding:40px 25px;
+    }
+
+    .auth-right{
+        padding:35px 25px;
+    }
+
+    .auth-left h1{
+        font-size:30px;
+    }
+
+    .auth-right h2{
+        font-size:28px;
+    }
+}

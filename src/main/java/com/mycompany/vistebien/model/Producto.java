@@ -9,19 +9,20 @@ public class Producto {
     private int stock;
     private String imagen;
     private String categoria;
-    private int idUsuario;
+    private int idAdministrador;
 
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion, double precio, int stock, String imagen, String categoria, int idUsuario) {
+    public Producto(String nombre, String descripcion, double precio, int stock,
+                    String imagen, String categoria, int idAdministrador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
         this.imagen = imagen;
         this.categoria = categoria;
-        this.idUsuario = idUsuario;
+        this.idAdministrador = idAdministrador;
     }
 
     public int getIdProducto() {
@@ -72,10 +73,6 @@ public class Producto {
         this.imagen = imagen;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
     public String getCategoria() {
         return categoria;
     }
@@ -84,7 +81,11 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public int getIdAdministrador() {
+        return idAdministrador;
+    }
+
+    public void setIdAdministrador(int idAdministrador) {
+        this.idAdministrador = idAdministrador;
     }
 }

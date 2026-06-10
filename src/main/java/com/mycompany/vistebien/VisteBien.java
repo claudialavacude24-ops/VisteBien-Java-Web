@@ -413,7 +413,7 @@ public class VisteBien {
 
                             case 2:
                                 List<Producto> productos = productoDAO.listarProductosConAdministrador();
-                                System.out.println("\nIdProducto | Nombre | Descripción | Precio | Stock | Imagen | Categoria | IdUsuario");
+                                System.out.println("\nIdProducto | Nombre | Descripción | Precio | Stock | Imagen | Categoria | IdAdministrador");
                                 for (Producto p : productos) {
                                     System.out.println(
                                             p.getIdProducto() + " | "
@@ -423,7 +423,7 @@ public class VisteBien {
                                             + p.getStock() + " | "
                                             + p.getImagen() + " | "
                                             + p.getCategoria() + " | "
-                                            + p.getIdUsuario()
+                                            + p.getIdAdministrador()
                                     );
                                 }
                                 break;

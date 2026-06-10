@@ -68,7 +68,7 @@ public class ProductoApiController {
             dao.actualizarCampo(id, "Precio", datos.getPrecio());
             dao.actualizarCampo(id, "Stock", datos.getStock());
             dao.actualizarCampo(id, "Categoria", datos.getCategoria());
-            dao.actualizarCampo(id, "IdUsuario", datos.getIdUsuario());
+            dao.actualizarCampo(id, "IdUsuario", datos.getIdAdministrador());
 
             // Si viene ruta de imagen en el JSON
             if (datos.getImagen() != null && !datos.getImagen().isEmpty()) {

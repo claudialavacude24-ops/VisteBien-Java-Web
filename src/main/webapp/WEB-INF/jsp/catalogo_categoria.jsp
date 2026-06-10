@@ -44,7 +44,7 @@
                     </a>
 
                 <!--<a href="${pageContext.request.contextPath}/administrado/a>r">Administrador</a>-->
-                    <a href="${pageContext.request.contextPath}/producto">Productos</a>
+                   <!-- <a href="${pageContext.request.contextPath}/producto">Productos</a>-->
 
                 </div>
             </div>
