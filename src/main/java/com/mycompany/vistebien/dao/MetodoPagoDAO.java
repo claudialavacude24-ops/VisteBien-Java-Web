@@ -76,4 +76,43 @@ public class MetodoPagoDAO {
             e.printStackTrace();
         }
     }
+
+    // ==========================================
+// OBTENER METODO POR ID
+// ==========================================
+    public MetodoPago obtenerPorId(int idMetodo) {
+
+        MetodoPago mp = null;
+
+        String sql
+                = "SELECT * "
+                + "FROM metodo_pago "
+                + "WHERE IdMetodo=?";
+
+        try (
+                Connection conn = ConexionBD.getConnection(); PreparedStatement stmt
+                = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idMetodo);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                mp = new MetodoPago();
+
+                mp.setIdMetodo(
+                        rs.getInt("IdMetodo"));
+
+                mp.setNombre(
+                        rs.getString("Nombre"));
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return mp;
+    }
 }

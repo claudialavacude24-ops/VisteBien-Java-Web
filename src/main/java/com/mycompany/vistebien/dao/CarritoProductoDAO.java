@@ -289,30 +289,32 @@ public class CarritoProductoDAO {
 
         String sql
                 = "SELECT COALESCE(SUM(Cantidad),0) Total "
-                + "FROM carrito_producto "
-                + "WHERE IdUsuario=? "
-                + "AND EstadoCompra='pendiente'";
+                + "FROM carrito_producto cp "
+                + "INNER JOIN carrito c "
+                + "ON cp.IdCarrito = c.IdCarrito "
+                + "WHERE cp.IdUsuario=? "
+                + "AND cp.EstadoCompra='pendiente' "
+                + "AND c.estado='pendiente'";
 
         try (
-                Connection conn
-                = ConexionBD.getConnection(); PreparedStatement stmt
-                = conn.prepareStatement(sql)) {
+                Connection conn = ConexionBD.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idUsuario);
 
-            ResultSet rs
-                    = stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
 
-                cantidad
-                        = rs.getInt("Total");
+                cantidad = rs.getInt("Total");
             }
 
         } catch (SQLException e) {
 
             e.printStackTrace();
         }
+
+        System.out.println(
+                "CONTADOR CARRITO = " + cantidad);
 
         return cantidad;
     }

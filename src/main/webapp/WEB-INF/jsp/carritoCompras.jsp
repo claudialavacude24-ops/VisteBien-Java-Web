@@ -195,12 +195,8 @@
 
                         <c:if test="${not empty items}">
 
-                            <form method="post"
-                                  action="${pageContext.request.contextPath}/carritoCompra/finalizar">
-
-                                <input type="hidden"
-                                       name="idCarrito"
-                                       value="${idCarrito}">
+                            <form method="get"
+                                  action="${pageContext.request.contextPath}/pago">
 
                                 <button type="submit"
                                         class="btn-finalizar">

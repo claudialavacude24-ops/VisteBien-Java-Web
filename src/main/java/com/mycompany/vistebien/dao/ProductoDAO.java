@@ -261,4 +261,29 @@ public class ProductoDAO {
         return null;
     }
 
+    public void descontarStock(
+            int idProducto,
+            int cantidad) {
+
+        String sql
+                = "UPDATE producto "
+                + "SET Stock = Stock - ? "
+                + "WHERE IdProducto=?";
+
+        try (
+                Connection conn
+                = ConexionBD.getConnection(); PreparedStatement stmt
+                = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, cantidad);
+            stmt.setInt(2, idProducto);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+    }
+
 }
