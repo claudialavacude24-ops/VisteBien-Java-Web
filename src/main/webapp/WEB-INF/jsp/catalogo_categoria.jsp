@@ -4,285 +4,321 @@
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - ${categoriaSeleccionada} | VisteBien</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Catálogo - ${categoriaSeleccionada} | VisteBien</title>
 
-    <link rel="icon" type="image/png"
-          href="${pageContext.request.contextPath}/img/favicon-32x32.png">
+        <link rel="icon" type="image/png"
+              href="${pageContext.request.contextPath}/img/favicon-32x32.png">
 
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/catalogo.css">
-</head>
+        <link rel="stylesheet"
+              href="${pageContext.request.contextPath}/css/catalogo.css">
+    </head>
 
-<body>
+    <body>
 
-<header>
+        <header>
 
-    <div class="inicio-encabezado">
+            <div class="inicio-encabezado">
 
-        <!-- LOGO -->
-        <img src="${pageContext.request.contextPath}/img/logo.jpg"
-             alt="Logo VisteBien">
+                <!-- LOGO -->
+                <img src="${pageContext.request.contextPath}/img/logo.jpg"
+                     alt="Logo VisteBien">
 
-        <!-- MENÚ -->
-        <div class="botones-inicio">
+                <!-- MENÚ -->
+                <div class="botones-inicio">
 
-            <!-- SIEMPRE -->
-            <a href="${pageContext.request.contextPath}/index">
-                Inicio
-            </a>
-
-            <!-- CATALOGO -->
-            <div class="dropdown">
-
-                <button id="catalogoSelector">
-                    Catálogo
-                </button>
-
-                <div class="dropdown-content">
-
-                    <a href="${pageContext.request.contextPath}/catalogo">
-                        General
+                    <!-- SIEMPRE -->
+                    <a href="${pageContext.request.contextPath}/index">
+                        Inicio
                     </a>
 
-                    <a href="${pageContext.request.contextPath}/catalogo/Vestidos">
-                        Vestidos
-                    </a>
+                    <!-- CATALOGO -->
+                    <div class="dropdown">
 
-                    <a href="${pageContext.request.contextPath}/catalogo/Pantalones">
-                        Pantalones
-                    </a>
+                        <button id="catalogoSelector">
+                            Catálogo
+                        </button>
 
-                    <a href="${pageContext.request.contextPath}/catalogo/Camisas y camisetas">
-                        Camisas y camisetas
-                    </a>
+                        <div class="dropdown-content">
 
-                    <a href="${pageContext.request.contextPath}/catalogo/Ropa deportiva">
-                        Ropa deportiva
-                    </a>
+                            <a href="${pageContext.request.contextPath}/catalogo">
+                                General
+                            </a>
 
-                    <a href="${pageContext.request.contextPath}/catalogo/Accesorios">
-                        Accesorios
-                    </a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Vestidos">
+                                Vestidos
+                            </a>
 
-                    <a href="${pageContext.request.contextPath}/catalogo/Maquillaje">
-                        Maquillaje
-                    </a>
+                            <a href="${pageContext.request.contextPath}/catalogo/Pantalones">
+                                Pantalones
+                            </a>
+
+                            <a href="${pageContext.request.contextPath}/catalogo/Camisas y camisetas">
+                                Camisas y camisetas
+                            </a>
+
+                            <a href="${pageContext.request.contextPath}/catalogo/Ropa deportiva">
+                                Ropa deportiva
+                            </a>
+
+                            <a href="${pageContext.request.contextPath}/catalogo/Accesorios">
+                                Accesorios
+                            </a>
+
+                            <a href="${pageContext.request.contextPath}/catalogo/Maquillaje">
+                                Maquillaje
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         SOLO ADMIN
+                    ====================================== -->
+                    <c:if test="${sessionScope.rol eq 'admin'}">
+
+                        <a href="${pageContext.request.contextPath}/producto">
+                            Productos
+                        </a>
+
+                        <a href="${pageContext.request.contextPath}/usuario">
+                            Usuarios
+                        </a>
+
+                        <a href="${pageContext.request.contextPath}/administrador">
+                            Administradores
+                        </a>                           
+
+                        <a href="${pageContext.request.contextPath}/carrito_producto">
+                            🛒 Carrito
+                        </a>
+                    </c:if>
+
+                    <!-- =====================================
+                         USUARIO LOGUEADO
+                    ====================================== -->
+                    <c:if test="${not empty sessionScope.nombreUsuario}">
+
+                        <c:if test="${sessionScope.rol eq 'cliente'}">
+
+                            <a href="${pageContext.request.contextPath}/carrito">
+                                🛒 Carrito
+
+                                <span class="badge">
+                                    ${sessionScope.cantidadCarrito}
+                                </span>
+
+                            </a>
+
+                        </c:if>
+
+                    </c:if>
+
+                    <!-- INVITADO -->
+                    <c:if test="${empty sessionScope.rol}">
+
+                        <a href="${pageContext.request.contextPath}/login">
+                            Iniciar sesión
+                        </a>
+
+                        <a href="${pageContext.request.contextPath}/registro">
+                            Registrarse
+                        </a>
+
+                    </c:if>
+
+                    <!-- LOGUEADOS -->
+                    <c:if test="${not empty sessionScope.rol}">
+
+                        <span class="usuario-logueado">
+                            ${sessionScope.nombreUsuario}
+                        </span>
+
+                        <a href="${pageContext.request.contextPath}/logout">
+                            Cerrar sesión
+                        </a>
+
+                    </c:if>
 
                 </div>
 
             </div>
 
-            <!-- SOLO USUARIO Y ADMIN -->
-            <c:if test="${not empty sessionScope.rol}">
-                <a href="${pageContext.request.contextPath}/carrito">
-                    Carrito
-                </a>
-            </c:if>
+            <!-- TITULO -->
+            <div class="banner-texto">
+                <h1>Catálogo de ${categoriaSeleccionada}</h1>
+                <p>VisteBien — Moda con propósito</p>
+            </div>
 
-            <!-- SOLO ADMIN -->
-            <c:if test="${sessionScope.rol == 'admin'}">
+        </header>
 
-                <a href="${pageContext.request.contextPath}/producto">
-                    Productos
-                </a>
+        <!-- PRODUCTOS -->
+        <div class="contenedor-catalogo">
 
-                <a href="${pageContext.request.contextPath}/usuario">
-                    Usuarios
-                </a>
+            <div class="grid-productos">
 
-                <a href="${pageContext.request.contextPath}/administrador">
-                    Administradores
-                </a>
+                <c:forEach var="p" items="${productos}">
 
-            </c:if>
+                    <div class="producto-card">
 
-            <!-- INVITADO -->
-            <c:if test="${empty sessionScope.rol}">
+                        <img src="${pageContext.request.contextPath}/uploads/${p.imagen}"
+                             alt="${p.nombre}">
 
-                <a href="${pageContext.request.contextPath}/login">
-                    Iniciar sesión
-                </a>
+                        <h3>${p.nombre}</h3>
 
-                <a href="${pageContext.request.contextPath}/registro">
-                    Registrarse
-                </a>
+                        <p>${p.descripcion}</p>
 
-            </c:if>
+                        <p class="precio">
+                            <fmt:formatNumber
+                                value="${p.precio}"
+                                type="currency"
+                                currencySymbol="$"/>
+                        </p>
 
-            <!-- LOGUEADOS -->
-            <c:if test="${not empty sessionScope.rol}">
+                        <c:if test="${sessionScope.rol == 'cliente'}">
 
-                <span class="usuario-logueado">
-                    ${sessionScope.nombreUsuario}
-                </span>
+                            <form action="${pageContext.request.contextPath}/carrito/agregar" method="post">
 
-                <a href="${pageContext.request.contextPath}/logout">
-                    Cerrar sesión
-                </a>
+                                <input type="hidden"
+                                       name="idProducto"
+                                       value="${p.idProducto}">
 
-            </c:if>
+                                <input type="hidden"
+                                       name="cantidad"
+                                       value="1">
 
-        </div>
+                                <button type="submit"
+                                        class="boton-agregar">
+                                    Agregar al carrito
+                                </button>
 
-    </div>
+                            </form>
 
-    <!-- TITULO -->
-    <div class="banner-texto">
-        <h1>Catálogo de ${categoriaSeleccionada}</h1>
-        <p>VisteBien — Moda con propósito</p>
-    </div>
+                        </c:if>
 
-</header>
+                    </div>
 
-<!-- PRODUCTOS -->
-<div class="contenedor-catalogo">
-
-    <div class="grid-productos">
-
-        <c:forEach var="p" items="${productos}">
-
-            <div class="producto-card">
-
-                <img src="${pageContext.request.contextPath}/uploads/${p.imagen}"
-                     alt="${p.nombre}">
-
-                <h3>${p.nombre}</h3>
-
-                <p>${p.descripcion}</p>
-
-                <p class="precio">
-                    <fmt:formatNumber
-                            value="${p.precio}"
-                            type="currency"
-                            currencySymbol="$"/>
-                </p>
-
-                <button class="boton-agregar">
-                    Agregar al carrito
-                </button>
+                </c:forEach>
 
             </div>
 
-        </c:forEach>
+        </div>
 
-    </div>
+        <!-- FOOTER -->
+        <footer>
 
-</div>
+            <img src="${pageContext.request.contextPath}/img/logo.jpg"
+                 alt="Logo VisteBien">
 
-<!-- FOOTER -->
-<footer>
+            <p>
+                © 2026 VisteBien — Moda con propósito
+            </p>
 
-    <img src="${pageContext.request.contextPath}/img/logo.jpg"
-         alt="Logo VisteBien">
+        </footer>
 
-    <p>
-        © 2026 VisteBien — Moda con propósito
-    </p>
+        <script>
+            (function () {
 
-</footer>
-
-<script>
-    (function () {
-
-        const btn = document.getElementById('catalogoSelector');
-        const menu = btn
-                ? btn.closest('.dropdown')
+                const btn = document.getElementById('catalogoSelector');
+                const menu = btn
+                        ? btn.closest('.dropdown')
                         .querySelector('.dropdown-content')
-                : null;
+                        : null;
 
-        if (!btn || !menu)
-            return;
+                if (!btn || !menu)
+                    return;
 
-        let closeTimer = null;
+                let closeTimer = null;
 
-        btn.addEventListener('click', function (e) {
+                btn.addEventListener('click', function (e) {
 
-            e.stopPropagation();
+                    e.stopPropagation();
 
-            const abierto =
-                    menu.classList.contains('visible');
+                    const abierto =
+                            menu.classList.contains('visible');
 
-            if (abierto) {
-                cerrarMenu();
-            } else {
-                abrirMenu();
-            }
+                    if (abierto) {
+                        cerrarMenu();
+                    } else {
+                        abrirMenu();
+                    }
 
-        });
+                });
 
-        btn.addEventListener('mouseenter', function () {
+                btn.addEventListener('mouseenter', function () {
 
-            clearTimeout(closeTimer);
-            abrirMenu();
+                    clearTimeout(closeTimer);
+                    abrirMenu();
 
-        });
+                });
 
-        btn.addEventListener('mouseleave', function () {
+                btn.addEventListener('mouseleave', function () {
 
-            closeTimer =
-                    setTimeout(cerrarMenu, 400);
+                    closeTimer =
+                            setTimeout(cerrarMenu, 400);
 
-        });
+                });
 
-        menu.addEventListener('mouseenter', function () {
+                menu.addEventListener('mouseenter', function () {
 
-            clearTimeout(closeTimer);
+                    clearTimeout(closeTimer);
 
-        });
+                });
 
-        menu.addEventListener('mouseleave', function () {
+                menu.addEventListener('mouseleave', function () {
 
-            closeTimer =
-                    setTimeout(cerrarMenu, 300);
+                    closeTimer =
+                            setTimeout(cerrarMenu, 300);
 
-        });
+                });
 
-        document.addEventListener('click', function (e) {
+                document.addEventListener('click', function (e) {
 
-            if (!btn.closest('.dropdown')
-                    .contains(e.target)) {
+                    if (!btn.closest('.dropdown')
+                            .contains(e.target)) {
 
-                cerrarMenu();
+                        cerrarMenu();
 
-            }
+                    }
 
-        });
+                });
 
-        function abrirMenu() {
+                function abrirMenu() {
 
-            menu.style.display = 'block';
+                    menu.style.display = 'block';
 
-            requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
 
-                menu.classList.add('visible');
-                btn.classList.add('activo');
+                        menu.classList.add('visible');
+                        btn.classList.add('activo');
 
-            });
-
-        }
-
-        function cerrarMenu() {
-
-            menu.classList.remove('visible');
-            btn.classList.remove('activo');
-
-            setTimeout(function () {
-
-                if (!menu.classList.contains('visible')) {
-
-                    menu.style.display = 'none';
+                    });
 
                 }
 
-            }, 200);
+                function cerrarMenu() {
 
-        }
+                    menu.classList.remove('visible');
+                    btn.classList.remove('activo');
 
-    })();
-</script>
+                    setTimeout(function () {
 
-</body>
+                        if (!menu.classList.contains('visible')) {
+
+                            menu.style.display = 'none';
+
+                        }
+
+                    }, 200);
+
+                }
+
+            })();
+        </script>
+
+    </body>
 </html>

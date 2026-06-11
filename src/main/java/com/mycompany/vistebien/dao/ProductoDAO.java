@@ -211,4 +211,54 @@ public class ProductoDAO {
         }
     }
 
+    public Producto obtenerPorId(int idProducto) {
+
+        String sql
+                = "SELECT * FROM producto WHERE IdProducto=?";
+
+        try (
+                Connection conn = ConexionBD.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idProducto);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                Producto p = new Producto();
+
+                p.setIdProducto(
+                        rs.getInt("IdProducto"));
+
+                p.setNombre(
+                        rs.getString("Nombre"));
+
+                p.setDescripcion(
+                        rs.getString("Descripcion"));
+
+                p.setPrecio(
+                        rs.getDouble("Precio"));
+
+                p.setStock(
+                        rs.getInt("Stock"));
+
+                p.setImagen(
+                        rs.getString("Imagen"));
+
+                p.setCategoria(
+                        rs.getString("Categoria"));
+
+                p.setIdAdministrador(
+                        rs.getInt("IdAdministrador"));
+
+                return p;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }

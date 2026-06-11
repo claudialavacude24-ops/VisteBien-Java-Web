@@ -16,18 +16,39 @@ public class CatalogoController {
 
     // Página general del catálogo
     @GetMapping
-    public String catalogoGeneral(Model model) {
-        List<Producto> productos = productoDAO.listarProductosConAdministrador();
+    public String catalogoGeneral(
+            Model model,
+            jakarta.servlet.http.HttpSession session) {
+
+        List<Producto> productos
+                = productoDAO.listarProductosConAdministrador();
+
         model.addAttribute("productos", productos);
-        return "catalogo_general"; // JSP con todos los productos
+
+        session.setAttribute(
+                "ultimaPagina",
+                "/catalogo");
+
+        return "catalogo_general";
     }
 
     // Página por categoría
     @GetMapping("/{categoria}")
-    public String catalogoPorCategoria(@PathVariable("categoria") String categoria, Model model) {
-        List<Producto> productos = productoDAO.listarPorCategoria(categoria);
+    public String catalogoPorCategoria(
+            @PathVariable("categoria") String categoria,
+            Model model,
+            jakarta.servlet.http.HttpSession session) {
+
+        List<Producto> productos
+                = productoDAO.listarPorCategoria(categoria);
+
         model.addAttribute("productos", productos);
         model.addAttribute("categoriaSeleccionada", categoria);
-        return "catalogo_categoria"; // JSP dinámico
+
+        session.setAttribute(
+                "ultimaPagina",
+                "/catalogo/" + categoria);
+
+        return "catalogo_categoria";
     }
 }

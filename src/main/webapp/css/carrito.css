@@ -1,0 +1,501 @@
+/* ==========================================
+   CARRITO VISTEBIEN
+   ========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --primary:#0f172a;
+    --secondary:#1e293b;
+    --accent:#2563eb;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --light:#f8fafc;
+    --border:#e2e8f0;
+    --text:#334155;
+    --white:#ffffff;
+}
+
+body{
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    background:linear-gradient(
+        135deg,
+        #f8fafc 0%,
+        #eef2ff 50%,
+        #f8fafc 100%
+    );
+
+    color:var(--text);
+
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+}
+main{
+    flex:1;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+header{
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+    padding:30px 20px;
+    box-shadow:0 4px 25px rgba(0,0,0,.15);
+}
+
+.titulo-carrito{
+    color:white;
+    text-align:center;
+    font-size:2.3rem;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+/* ==========================================
+   LAYOUT
+   ========================================== */
+
+.cart-wrapper{
+    max-width:1400px;
+    margin:40px auto;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+}
+
+/* ==========================================
+   TARJETAS
+   ========================================== */
+
+.cart-panel,
+.summary-panel{
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.4);
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.08),
+        0 1px 4px rgba(0,0,0,.05);
+}
+
+.cart-panel-header,
+.summary-header{
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+    color:white;
+    padding:22px;
+    font-size:1.1rem;
+    font-weight:700;
+}
+
+/* ==========================================
+   BADGE
+   ========================================== */
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:28px;
+    height:28px;
+
+    margin-left:12px;
+
+    background:var(--danger);
+    color:white;
+
+    border-radius:50%;
+    font-size:.9rem;
+    font-weight:700;
+}
+
+/* ==========================================
+   ITEM CARRITO
+   ========================================== */
+
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    padding:24px;
+
+    border-bottom:1px solid var(--border);
+
+    transition:.25s ease;
+}
+
+.cart-item:hover{
+    background:#f8fafc;
+}
+
+.item-img{
+    width:110px;
+    height:110px;
+
+    border-radius:14px;
+    overflow:hidden;
+
+    border:1px solid var(--border);
+
+    background:white;
+
+    flex-shrink:0;
+}
+
+.item-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.no-img{
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:45px;
+}
+
+/* ==========================================
+   INFO PRODUCTO
+   ========================================== */
+
+.item-info{
+    flex:1;
+}
+
+.item-name{
+    font-size:1.1rem;
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:8px;
+}
+
+.item-price-unit{
+    color:#64748b;
+    margin-bottom:14px;
+}
+
+/* ==========================================
+   CANTIDAD
+   ========================================== */
+
+.qty-form{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.qty-btn{
+    width:38px;
+    height:38px;
+
+    border:none;
+    border-radius:10px;
+
+    background:var(--primary);
+    color:white;
+
+    font-size:18px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.qty-btn:hover{
+    background:var(--accent);
+    transform:translateY(-2px);
+}
+
+.qty-input{
+    width:70px;
+    height:38px;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+    border-radius:10px;
+
+    font-size:15px;
+    font-weight:600;
+}
+
+/* ==========================================
+   DERECHA ITEM
+   ========================================== */
+
+.item-right{
+    text-align:right;
+}
+
+.item-subtotal{
+    display:block;
+
+    font-size:1.3rem;
+    font-weight:700;
+
+    color:var(--success);
+
+    margin-bottom:12px;
+}
+
+/* ==========================================
+   ELIMINAR
+   ========================================== */
+
+.btn-eliminar{
+    border:none;
+
+    padding:10px 18px;
+
+    background:var(--danger);
+    color:white;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.btn-eliminar:hover{
+    transform:translateY(-2px);
+    box-shadow:0 5px 15px rgba(220,38,38,.35);
+}
+
+/* ==========================================
+   RESUMEN
+   ========================================== */
+
+.summary-panel{
+    height:fit-content;
+    position:sticky;
+    top:25px;
+}
+
+.summary-body{
+    padding:25px;
+}
+
+.s-row{
+    display:flex;
+    justify-content:space-between;
+
+    margin-bottom:18px;
+
+    font-size:15px;
+}
+
+.s-divider{
+    border:none;
+    border-top:1px solid var(--border);
+    margin:20px 0;
+}
+
+.s-total{
+    display:flex;
+    justify-content:space-between;
+
+    font-size:1.7rem;
+    font-weight:700;
+
+    color:var(--primary);
+
+    margin-bottom:20px;
+}
+
+/* ==========================================
+   BOTON FINALIZAR
+   ========================================== */
+
+.btn-finalizar{
+    width:100%;
+
+    border:none;
+
+    padding:16px;
+
+    background:linear-gradient(
+        135deg,
+        var(--success),
+        #22c55e
+    );
+
+    color:white;
+
+    font-size:16px;
+    font-weight:700;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.btn-finalizar:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(34,197,94,.35);
+}
+
+.btn-finalizar:disabled{
+    background:#94a3b8;
+    cursor:not-allowed;
+}
+
+/* ==========================================
+   SEGUIR COMPRANDO
+   ========================================== */
+
+.btn-seguir{
+    display:block;
+
+    text-align:center;
+    text-decoration:none;
+
+    margin-top:12px;
+    padding:15px;
+
+    border-radius:12px;
+
+    background:var(--primary);
+    color:white;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.btn-seguir:hover{
+    background:var(--accent);
+}
+
+/* ==========================================
+   VACIO Y EXITO
+   ========================================== */
+
+.cart-empty,
+.cart-success{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.icon{
+    display:block;
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+.cart-empty h2,
+.cart-success h2{
+    color:var(--primary);
+    margin-bottom:10px;
+}
+
+.cart-empty p,
+.cart-success p{
+    color:#64748b;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+footer{
+    margin-top:auto;
+
+    background:var(--primary);
+
+    color:white;
+
+    text-align:center;
+
+    padding:10px 20px;
+}
+
+footer img{
+
+    height:60px;
+
+    margin-bottom:-5px;
+}
+
+footer p{
+
+    margin:3px 0;
+}
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 992px){
+
+    .cart-wrapper{
+        grid-template-columns:1fr;
+    }
+
+    .summary-panel{
+        position:static;
+    }
+}
+
+@media (max-width: 768px){
+
+    .cart-item{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .item-right{
+        text-align:center;
+    }
+
+    .qty-form{
+        justify-content:center;
+    }
+
+    .titulo-carrito{
+        font-size:1.8rem;
+    }
+}
+
+@media (max-width: 480px){
+
+    .cart-wrapper{
+        padding:0 10px;
+    }
+
+    .item-img{
+        width:90px;
+        height:90px;
+    }
+
+    .s-total{
+        font-size:1.4rem;
+    }
+}

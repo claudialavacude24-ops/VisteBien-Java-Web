@@ -93,7 +93,7 @@
 
                             <c:if test="${not empty usuarioLogueado}">
                                 <span class="usuario-logueado">
-                                     ${usuarioLogueado.nombre}
+                                    ${usuarioLogueado.nombre}
                                 </span>
                             </c:if>
 
@@ -106,13 +106,22 @@
                         <%-- CLIENTE --%>
                         <c:when test="${rol eq 'cliente'}">
 
-                            <a href="${pageContext.request.contextPath}/carrito">
-                                🛒 Carrito
-                            </a>
+                            <c:if test="${not empty sessionScope.rol}">
+
+                                <a href="${pageContext.request.contextPath}/carrito">
+                                    🛒 Carrito
+
+                                    <span class="badge">
+                                        ${sessionScope.cantidadCarrito}
+                                    </span>
+
+                                </a>
+
+                            </c:if>
 
                             <c:if test="${not empty usuarioLogueado}">
                                 <span class="usuario-logueado">
-                                     ${usuarioLogueado.nombre}
+                                    ${usuarioLogueado.nombre}
                                 </span>
                             </c:if>
 

@@ -4,6 +4,7 @@ import com.mycompany.vistebien.dao.AdministradorDAO;
 import com.mycompany.vistebien.dao.UsuarioDAO;
 import com.mycompany.vistebien.model.Administrador;
 import com.mycompany.vistebien.model.Usuario;
+import com.mycompany.vistebien.dao.CarritoProductoDAO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -16,18 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuthController {
 
-    private final UsuarioDAO usuarioDAO
-            = new UsuarioDAO();
+    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    private final AdministradorDAO administradorDAO
-            = new AdministradorDAO();
+    private final AdministradorDAO administradorDAO = new AdministradorDAO();
+
+    private final CarritoProductoDAO cpDAO = new CarritoProductoDAO();
 
     // =====================================
     // MOSTRAR LOGIN
     // =====================================
     @GetMapping("/login")
     public String mostrarLogin() {
-
         return "login";
     }
 
@@ -36,7 +36,6 @@ public class AuthController {
     // =====================================
     @GetMapping("/registro")
     public String mostrarRegistro() {
-
         return "registro";
     }
 
@@ -59,11 +58,8 @@ public class AuthController {
             correo = correo.trim();
 
             if (nombre.isEmpty()) {
-
-                model.addAttribute(
-                        "error",
+                model.addAttribute("error",
                         "Debe ingresar el nombre");
-
                 return "registro";
             }
 
@@ -154,9 +150,9 @@ public class AuthController {
 
         try {
 
-            // -----------------------------
-            // VALIDAR ADMINISTRADOR
-            // -----------------------------
+            // ==========================
+            // ADMINISTRADOR
+            // ==========================
             Administrador admin
                     = administradorDAO.login(
                             correo,
@@ -176,12 +172,17 @@ public class AuthController {
                         "nombreUsuario",
                         admin.getNombre());
 
+                // NUEVO
+                session.setAttribute(
+                        "idAdministrador",
+                        admin.getIdAdministrador());
+
                 return "redirect:/index";
             }
 
-            // -----------------------------
-            // VALIDAR CLIENTE
-            // -----------------------------
+// ==========================
+// CLIENTE
+// ==========================
             Usuario usuario
                     = usuarioDAO.login(
                             correo,
@@ -200,6 +201,21 @@ public class AuthController {
                 session.setAttribute(
                         "nombreUsuario",
                         usuario.getNombre());
+
+                session.setAttribute(
+                        "idUsuario",
+                        usuario.getIdUsuario());
+
+                // =====================================
+                // CARGAR CANTIDAD DE PRODUCTOS CARRITO
+                // =====================================
+                int cantidadCarrito
+                        = cpDAO.contarProductosCarrito(
+                                usuario.getIdUsuario());
+
+                session.setAttribute(
+                        "cantidadCarrito",
+                        cantidadCarrito);
 
                 return "redirect:/index";
             }
@@ -226,8 +242,7 @@ public class AuthController {
     // CERRAR SESIÓN
     // =====================================
     @GetMapping("/logout")
-    public String logout(
-            HttpSession session) {
+    public String logout(HttpSession session) {
 
         session.invalidate();
 

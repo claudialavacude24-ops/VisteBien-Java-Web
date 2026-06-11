@@ -41,25 +41,6 @@
                 margin: 0;
             }
 
-            /* Tabla azul */
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin: 20px 0;
-            }
-            th {
-                background-color: var(--Azul-petróleo);
-                color: var(--Blanco);
-                padding: 10px;
-                text-align: center;
-            }
-            td {
-                background-color: var(--Azul-oscuro);
-                color: var(--Blanco);
-                padding: 10px;
-                text-align: center;
-            }
-
             /* Advertencias */
             .warning {
                 color: red;

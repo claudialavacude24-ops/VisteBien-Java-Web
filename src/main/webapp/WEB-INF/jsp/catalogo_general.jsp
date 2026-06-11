@@ -80,17 +80,6 @@
                     </div>
 
                     <!-- =====================================
-                         CLIENTE Y ADMIN
-                    ====================================== -->
-                    <c:if test="${not empty sessionScope.rol}">
-
-                        <a href="${pageContext.request.contextPath}/carrito">
-                            🛒 Carrito
-                        </a>
-
-                    </c:if>
-
-                    <!-- =====================================
                          SOLO ADMIN
                     ====================================== -->
                     <c:if test="${sessionScope.rol eq 'admin'}">
@@ -105,6 +94,10 @@
 
                         <a href="${pageContext.request.contextPath}/administrador">
                             Administradores
+                        </a>                           
+
+                        <a href="${pageContext.request.contextPath}/carrito_producto">
+                            🛒 Carrito
                         </a>
 
                     </c:if>
@@ -114,8 +107,21 @@
                     ====================================== -->
                     <c:if test="${not empty sessionScope.nombreUsuario}">
 
+                        <c:if test="${sessionScope.rol eq 'cliente'}">
+
+                            <a href="${pageContext.request.contextPath}/carrito">
+                                🛒 Carrito
+
+                                <span class="badge">
+                                    ${sessionScope.cantidadCarrito}
+                                </span>
+
+                            </a>
+
+                        </c:if>
+
                         <span class="usuario-logueado">
-                             ${sessionScope.nombreUsuario}
+                            ${sessionScope.nombreUsuario}
                         </span>
 
                         <a href="${pageContext.request.contextPath}/logout">
@@ -185,9 +191,26 @@
 
                         <!-- SOLO CLIENTE Y ADMIN -->
                         <c:if test="${not empty sessionScope.rol}">
-                            <button class="boton-agregar">
-                                Agregar al carrito
-                            </button>
+                            <c:if test="${sessionScope.rol == 'cliente'}">
+
+                                <form action="${pageContext.request.contextPath}/carrito/agregar" method="post">
+
+                                    <input type="hidden"
+                                           name="idProducto"
+                                           value="${p.idProducto}">
+
+                                    <input type="hidden"
+                                           name="cantidad"
+                                           value="1">
+
+                                    <button type="submit"
+                                            class="boton-agregar">
+                                        Agregar al carrito
+                                    </button>
+
+                                </form>
+
+                            </c:if>
                         </c:if>
 
                         <!-- INVITADO -->
@@ -231,7 +254,7 @@
 
                 const menu = btn
                         ? btn.closest('.dropdown')
-                                .querySelector('.dropdown-content')
+                        .querySelector('.dropdown-content')
                         : null;
 
                 if (!btn || !menu)

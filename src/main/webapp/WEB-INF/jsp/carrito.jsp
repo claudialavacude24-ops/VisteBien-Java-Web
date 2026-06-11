@@ -121,12 +121,13 @@
             <h2>Lista de Carritos</h2>
             <table>
                 <tr>
-                    <th>ID Carrito</th><th>ID Usuario</th>
+                    <th>ID Carrito</th><th>ID Usuario</th><th>Estado</th>
                 </tr>
                 <c:forEach var="c" items="${carritos}">
                     <tr>
                         <td>${c.idCarrito}</td>
                         <td>${c.idUsuario}</td>
+                        <td>${c.estado}</td>
                     </tr>
                 </c:forEach>
             </table>
@@ -164,8 +165,8 @@
             // ✅ Aplicar validación en ambos formularios
             validarNumerico("idUsuarioCarrito", "warnInsertCarrito", null);
             validarNumerico("idEliminarCarrito", "warnDeleteCarrito", "formEliminarCarrito");
-            
-            
+
+
             (function () {
                 const btn = document.getElementById('catalogoSelector');
                 const menu = btn ? btn.closest('.dropdown').querySelector('.dropdown-content') : null;

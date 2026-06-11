@@ -48,7 +48,7 @@ body{
 
     padding:12px 35px;
 
-    background:rgba(13,44,74,.92);
+    background:rgba(13,44,74,.95);
 
     box-shadow:
         0 8px 25px rgba(0,0,0,.25);
@@ -179,7 +179,7 @@ header{
 
     text-align:center;
 
-    padding:20px 20px 20px;
+    padding:2px 20px 20px;
 
     position:relative;
 
@@ -233,7 +233,7 @@ header{
 
     letter-spacing:1px;
 
-    margin-bottom:10px;
+    margin-bottom:2px;
 }
 
 .banner-texto p{
@@ -325,7 +325,7 @@ header{
 
     color:var(--Azul-petroleo);
 
-    font-size:1.3rem;
+    font-size:1.5rem;
 
     font-weight:700;
 
@@ -335,7 +335,7 @@ header{
 
 .producto-card p{
 
-    padding:0 20px;
+    padding:2px 20px;
     font-size: 20px;
     color:#666;
 }
@@ -349,7 +349,7 @@ header{
 
     font-weight:800;
 
-    margin-top:15px;
+    margin-top:10px;
 }
 
 /* ==========================
@@ -358,30 +358,27 @@ header{
 
 .boton-agregar{
 
+    width:calc(100% - 40px);
     margin:20px;
-
-    margin-top:10px;
-
+    margin-top:auto;
     border:none;
-
     border-radius:12px;
-
-    background:
-        linear-gradient(
+    background:linear-gradient(
         135deg,
         var(--Azul-petroleo),
         var(--Azul-cielo)
-        );
+    );
 
     color:white;
-
     font-weight:700;
-
-    padding:14px;
-
+    font-size:16px;
+    padding:16px 20px;
     cursor:pointer;
-
     transition:.3s;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
 }
 
 .boton-agregar:hover{
@@ -404,7 +401,7 @@ footer{
     background:
         linear-gradient(
         135deg,
-        #0D2C4A,
+        #0f172a,
         #1C3F5D
         );
 
@@ -412,19 +409,19 @@ footer{
 
     text-align:center;
 
-    padding:40px 20px;
+    padding:10px 20px;
 }
 
 footer img{
 
     height:60px;
 
-    margin-bottom:15px;
+    margin-bottom:-5px;
 }
 
 footer p{
 
-    margin:8px 0;
+    margin:3px 0;
 }
 
 /* ==========================
@@ -499,5 +496,33 @@ footer p{
 
 .usuario-logueado:hover{
     transform:translateY(-2px);
+}
+
+.badge{
+    background:red;
+    color:white;
+    border-radius:50%;
+    padding:2px 7px;
+    font-size:12px;
+    font-weight:bold;
+    margin-left:5px;
+}
+.producto-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    height:100%;
 }
 
